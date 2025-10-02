@@ -31,3 +31,12 @@ class Form1(Form1Template):
       colorscale='Viridis'
     ))
     self.plot_1.figure = fig
+
+  def link_step_1_click(self, **event_args):
+    stat = self.card_step_1.visible
+    self.card_step_1.visible = not stat
+    if (stat):
+      self.link_step_1.icon = 'fa:arrow-circle-right'
+    else:
+      self.link_step_1.icon = 'fa:arrow-circle-down'
+    
