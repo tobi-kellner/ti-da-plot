@@ -2,11 +2,21 @@ unique_ids:
   assets:
     colorscales/.gitkeep: '1759489269499233786841847.73212'
     colorscales/Blues.png: '1759489365405480251529897.50464'
+    colorscales/Greens.png: M7P274ARN2B2XBPZRHNTE3364FXLNTJH
+    colorscales/Reds.png: 2XWTO3UET3FUVIOLOEMXKYJQK5CFHPXN
+    colorscales/Spectral.png: NBVHE5Y5T2WMZH4D2DNVHNHI5QYQXRND
+    colorscales/cividis.png: 3NVSZLJAAR3MRCMMUCMMABX4CNR6JDLM
+    colorscales/coolwarm.png: VS2A3EGQODQY4QT7LFZGO2UJTEINO54I
+    colorscales/inferno.png: T2GVQWKS6US6FLXMZBGVNQDIEKKVIUNP
+    colorscales/magma.png: NWWJG6NQMPVXMOGISO5QUNDZHSPEJXI4
+    colorscales/plasma.png: VHEEIJ7A2OHABNBYXYTWMOIN7XENFLA4
+    colorscales/viridis.png: 2SPCYM2GKAKUZF47VFRKBR6E4OL6RTEL
     dashboard.html: SQPNPYUPYPBKTASHBTKJ2GYD7QKN5PUS
     single-column.html: AISZ5RZJAOUDJA6LS6DUEH2RWGB77KDH
     theme.css: EPPSPNUPENM6MG7FS3DTJ3DDMVOEY7V3
   forms:
     Form1: '1759250747463546154744587.10876'
+    Form1.ItemTemplateColorscale: '1759491427493737220342272.2749'
   modules: {}
   scripts: {}
   server_modules:
