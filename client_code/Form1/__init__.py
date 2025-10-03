@@ -19,16 +19,15 @@ class Form1(Form1Template):
 
 
   def link_step_1_click(self, **event_args):
-    self.show_hide_card(self.card_step_1)
+    self.show_hide_card(self.card_step_1,self.link_step_1)
 
-  def show_hide_card(self, card: ColumnPanel, **event_args):
+  def show_hide_card(self, card: ColumnPanel, link: Link, **event_args):
     stat = card.visible
-    user_logging("Setting "+stat)
     card.visible = not stat
     if (stat):
-      card.icon = 'fa:arrow-circle-right'
+      link.icon = 'fa:arrow-circle-right'
     else:
-      card.icon = 'fa:arrow-circle-down'
+      link.icon = 'fa:arrow-circle-down'
     
 
   def file_loader_1_change(self, file, **event_args):
@@ -44,6 +43,8 @@ class Form1(Form1Template):
 
   def plot_heatmap(self, result):
     # result contains: x (dates), y (times), z (values)
+
+    self.show_hide_card(self.card_step_1,self.link_step_1)
     
     fig = go.Figure(data=go.Heatmap(
       x=result['x'],
