@@ -1,6 +1,11 @@
 allow_embedding: false
-name: Classic 1
-package_name: Classic_1
+dependencies:
+- dep_id: dep_7gt4ly7qk6m2j
+  resolution_hints: {app_id: C6ZZPAPN4YYF5NVJ, name: Anvil Extras, package_name: anvil_extras}
+  version: {version_tag: v3.4.2}
+metadata: {description: Allows you to create TiDaPlot time-date-heatmap plots, title: Ti-Da-Plot}
+name: Ti-Da-Plot
+package_name: Ti_Da_Plot
 runtime_options:
   client_version: '3'
   server_spec: {base: python310-standard}
