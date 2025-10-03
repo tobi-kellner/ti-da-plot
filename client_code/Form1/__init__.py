@@ -14,24 +14,35 @@ class Form1(Form1Template):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-    
+
     # Any code you write here will run before the form opens.
-    self.selected_colorscale = "Viridis"
-    self.colorscales = [
-      {"name": "Viridis", "asset": "_/theme/colorscales/viridis.png"},
-      {"name": "Plasma", "asset": "_/theme/colorscales/plasma.png"},
-      {"name": "Inferno", "asset": "_/theme/colorscales/inferno.png"},
-      {"name": "Cividis", "asset": "_/theme/colorscales/cividis.png"},
-    ]
-    for cs in self.colorscales:
-      l = Link(width="420px")
-      l.add_component(Image(source=cs['asset']))
-      l.set_event_handler("click", lambda cs=cs, **event_args: self.select_colorscale(cs, **event_args))
-      self.flow_panel_colorscale.add_component(l)
+
+    #Initially hide Step 2 card
+    self.show_hide_card(self.card_step_2,self.link_step_2)
+    
+    # Populate color scales in Step 2 card
+    # self.colorscales = [
+    #   "viridis", "plasma", "inferno", "magma", "cividis",
+    #   "Greens", "Blues", "Reds", "coolwarm", "Spectral"
+    # ]
+    # self.flow_panel_colorscales.clear()
+    # for cs in self.colorscales:
+    #   tile = Link(role="colorscale-tile")
+    #   filename = f"_/theme/colorscales/{cs}.png"
+    #   image = Image(source=filename, width="300px", height="30px", tooltip=cs)
+    #   tile.add_component(image)
+    #   tile.set_event_handler("click", lambda cs=cs, **event_args: self.select_colorscale(cs, **event_args))
+    #   self.flow_panel_colorscales.add_component(tile)
+    # #Now set first one as selected
+    # self.flow_panel_colorscales.get_components()[0].role = "colorscale-tile-selected"
+    # self.selected_colorscale = cs[0]
    
-  def select_colorscale(self, colorscale):
-    self.selected_colorscale = colorscale["name"]
-    Notification(f"Selected {colorscale['name']}").show()
+  # def select_colorscale(self, cs, **event_args):
+  #   for comp in self.flow_panel_colorscales.get_components():
+  #     comp.role = "colorscale-tile"
+  #   event_args['sender'].role = "colorscale-tile-selected"
+  #   self.selected_colorscale = cs
+  #   Notification(f"Selected {cs}").show()
 
   def link_step_1_click(self, **event_args):
     self.show_hide_card(self.card_step_1,self.link_step_1)
@@ -44,7 +55,6 @@ class Form1(Form1Template):
     else:
       link.icon = 'fa:arrow-circle-down'
     
-
   def file_loader_1_change(self, file, **event_args):
     if file:
       result = anvil.server.call('process_file', file)
@@ -55,18 +65,24 @@ class Form1(Form1Template):
     if text_data.strip():
       result = anvil.server.call('process_text', text_data)
       self.plot_heatmap(result)
+      self.show_hide_card(self.card_step_1,self.link_step_1)
+      self.show_hide_card(self.card_step_2,self.link_step_2)
+      #self.show_heatmap(result)
 
   def plot_heatmap(self, result):
     # result contains: x (dates), y (times), z (values)
 
-    self.show_hide_card(self.card_step_1,self.link_step_1)
-    
+    my_cs = "plasma"
     fig = go.Figure(data=go.Heatmap(
       x=result['x'],
       y=result['y'],
       z=result['z'],
-      colorscale='Viridis'
+      colorscale='plasma',
+      autocolorscale=False
     ))
-    self.plot_1.figure = fig
-
     
+    self.plot_1.figure = fig
+    user_logging.info(f"Created heatmap with {my_cs}")
+
+  def show_heatmap(self, fig):
+    self.plot_1.figure = fig

@@ -1,6 +1,7 @@
 import anvil.server
 import pandas as pd
 import io
+import plotly.graph_objects as go
 
 @anvil.server.callable
 def process_file(file):
@@ -25,10 +26,21 @@ def _process_dataframe(df):
 
   # Pivot into matrix for heatmap
   pivot = df.pivot_table(index='time', columns='date', values='value', aggfunc='mean')
-
+  
+  # fig = go.Figure(data=go.Heatmap(
+  #   x=pivot.columns.astype(str).tolist(),
+  #   y=pivot.index.astype(str).tolist(),
+  #   z=pivot.values.astype(float).tolist(),
+  #   colorscale='magma',
+  #   autocolorscale=False
+  # ))  
+  # return fig
+  
   return {
     'x': list(pivot.columns.astype(str)),   # dates
     'y': list(pivot.index),                 # times
-    'z': pivot.values.tolist()              # matrix of values
+    'z': pivot.values.astype(float).tolist()              # matrix of values
   }
+
+
 
