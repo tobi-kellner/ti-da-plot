@@ -20,29 +20,29 @@ class Form1(Form1Template):
     #Initially hide Step 2 card
     self.show_hide_card(self.card_step_2,self.link_step_2)
     
-    # Populate color scales in Step 2 card
-    # self.colorscales = [
-    #   "viridis", "plasma", "inferno", "magma", "cividis",
-    #   "Greens", "Blues", "Reds", "coolwarm", "Spectral"
-    # ]
-    # self.flow_panel_colorscales.clear()
-    # for cs in self.colorscales:
-    #   tile = Link(role="colorscale-tile")
-    #   filename = f"_/theme/colorscales/{cs}.png"
-    #   image = Image(source=filename, width="300px", height="30px", tooltip=cs)
-    #   tile.add_component(image)
-    #   tile.set_event_handler("click", lambda cs=cs, **event_args: self.select_colorscale(cs, **event_args))
-    #   self.flow_panel_colorscales.add_component(tile)
-    # #Now set first one as selected
-    # self.flow_panel_colorscales.get_components()[0].role = "colorscale-tile-selected"
-    # self.selected_colorscale = cs[0]
+    #Populate color scales in Step 2 card
+    self.colorscales = [
+      "viridis", "plasma", "inferno", "magma", "cividis",
+      "Greens", "Blues", "Reds", "coolwarm", "Spectral"
+    ]
+    self.flow_panel_colorscales.clear()
+    for cs in self.colorscales:
+      tile = Link(role="colorscale-tile")
+      filename = f"_/theme/colorscales/{cs}.png"
+      image = Image(source=filename, width="300px", height="30px", tooltip=cs)
+      tile.add_component(image)
+      tile.set_event_handler("click", lambda cs=cs, **event_args: self.select_colorscale(cs, **event_args))
+      self.flow_panel_colorscales.add_component(tile)
+    #Now set first one as selected
+    self.flow_panel_colorscales.get_components()[0].role = "colorscale-tile-selected"
+    self.selected_colorscale = cs[0]
    
-  # def select_colorscale(self, cs, **event_args):
-  #   for comp in self.flow_panel_colorscales.get_components():
-  #     comp.role = "colorscale-tile"
-  #   event_args['sender'].role = "colorscale-tile-selected"
-  #   self.selected_colorscale = cs
-  #   Notification(f"Selected {cs}").show()
+  def select_colorscale(self, cs, **event_args):
+    for comp in self.flow_panel_colorscales.get_components():
+      comp.role = "colorscale-tile"
+    event_args['sender'].role = "colorscale-tile-selected"
+    self.selected_colorscale = cs
+    Notification(f"Selected {cs}").show()
 
   def link_step_1_click(self, **event_args):
     self.show_hide_card(self.card_step_1,self.link_step_1)
