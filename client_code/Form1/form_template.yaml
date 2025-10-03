@@ -30,7 +30,7 @@ components:
   type: ColumnPanel
 - layout_properties: {grid_position: 'GGPXPN,HDDIHF'}
   name: link_step_2
-  properties: {text: 'Step 2: Format plot'}
+  properties: {icon: 'fa:arrow-circle-right', text: 'Step 2: Format plot'}
   type: Link
 - layout_properties: {grid_position: 'MUSCRC,DUNKDY'}
   name: column_panel_1
