@@ -1,4 +1,25 @@
 allow_embedding: false
+db_schema:
+  user_data:
+    client: none
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: session_id
+      type: string
+    - admin_ui: {order: 1, width: 200}
+      name: dt_created
+      type: datetime
+    - admin_ui: {order: 2, width: 200}
+      name: dt_changed
+      type: datetime
+    - admin_ui: {order: 3, width: 200}
+      name: raw_data
+      type: media
+    - admin_ui: {order: 2.5, width: 200}
+      name: access_counter
+      type: number
+    server: full
+    title: user_data
 dependencies:
 - dep_id: dep_7gt4ly7qk6m2j
   resolution_hints: {app_id: C6ZZPAPN4YYF5NVJ, name: Anvil Extras, package_name: anvil_extras}

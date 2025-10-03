@@ -1,6 +1,9 @@
 from ._anvil_designer import Form1Template
 from anvil_extras.logging import Logger, DEBUG
 from anvil import *
+import anvil.tables as tables
+import anvil.tables.query as q
+from anvil.tables import app_tables
 import anvil.server
 import plotly.graph_objects as go
 
@@ -47,6 +50,9 @@ class Form1(Form1Template):
   def link_step_1_click(self, **event_args):
     self.show_hide_card(self.card_step_1,self.link_step_1)
 
+  def link_step_2_click(self, **event_args):
+    self.show_hide_card(self.card_step_2,self.link_step_2)
+
   def show_hide_card(self, card: ColumnPanel, link: Link, **event_args):
     stat = card.visible
     card.visible = not stat
@@ -86,3 +92,4 @@ class Form1(Form1Template):
 
   def show_heatmap(self, fig):
     self.plot_1.figure = fig
+

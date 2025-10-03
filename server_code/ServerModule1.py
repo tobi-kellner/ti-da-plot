@@ -1,7 +1,12 @@
+import anvil.tables as tables
+import anvil.tables.query as q
+from anvil.tables import app_tables
 import anvil.server
 import pandas as pd
 import io
 import plotly.graph_objects as go
+from . import ServerData as data
+import hashlib
 
 @anvil.server.callable
 def process_file(file):
@@ -13,6 +18,7 @@ def process_file(file):
 def process_text(text_data):
   # Assume tab or comma separated
   df = pd.read_csv(io.StringIO(text_data), sep=None, engine="python")
+  data.save_datatable(df)
   return _process_dataframe(df)
 
 def _process_dataframe(df):
