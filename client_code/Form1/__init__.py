@@ -1,8 +1,14 @@
 from ._anvil_designer import Form1Template
+from anvil_extras.logging import Logger, DEBUG
 from anvil import *
 import anvil.server
 import plotly.graph_objects as go
 
+user_logging = Logger(
+  name="user",
+  level=DEBUG,
+  format="{name}-{level} {datetime:%Y-%m-%d %H:%M:%S}: {msg}",
+)
 
 class Form1(Form1Template):
   def __init__(self, **properties):
@@ -10,6 +16,20 @@ class Form1(Form1Template):
     self.init_components(**properties)
 
     # Any code you write here will run before the form opens.
+
+
+  def link_step_1_click(self, **event_args):
+    self.show_hide_card(self.card_step_1)
+
+  def show_hide_card(self, card: ColumnPanel, **event_args):
+    stat = card.visible
+    user_logging("Setting "+stat)
+    card.visible = not stat
+    if (stat):
+      card.icon = 'fa:arrow-circle-right'
+    else:
+      card.icon = 'fa:arrow-circle-down'
+    
 
   def file_loader_1_change(self, file, **event_args):
     if file:
@@ -24,6 +44,7 @@ class Form1(Form1Template):
 
   def plot_heatmap(self, result):
     # result contains: x (dates), y (times), z (values)
+    
     fig = go.Figure(data=go.Heatmap(
       x=result['x'],
       y=result['y'],
@@ -32,11 +53,4 @@ class Form1(Form1Template):
     ))
     self.plot_1.figure = fig
 
-  def link_step_1_click(self, **event_args):
-    stat = self.card_step_1.visible
-    self.card_step_1.visible = not stat
-    if (stat):
-      self.link_step_1.icon = 'fa:arrow-circle-right'
-    else:
-      self.link_step_1.icon = 'fa:arrow-circle-down'
     
