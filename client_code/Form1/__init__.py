@@ -20,10 +20,10 @@ class Form1(Form1Template):
 
     # Any code you write here will run before the form opens.
 
-    #Initially hide Step 2 card
-    self.show_hide_card(self.card_step_2,self.link_step_2)
+    #Initially hide Step 3 card
+    self.show_hide_card(self.card_step_3,self.link_step_3)
     
-    #Populate color scales in Step 2 card
+    #Populate color scales in Step 3 card
     self.colorscales = [
       "viridis", "plasma", "inferno", "magma", "cividis",
       "Greens", "Blues", "Reds", "coolwarm", "Spectral"
@@ -50,8 +50,8 @@ class Form1(Form1Template):
   def link_step_1_click(self, **event_args):
     self.show_hide_card(self.card_step_1,self.link_step_1)
 
-  def link_step_2_click(self, **event_args):
-    self.show_hide_card(self.card_step_2,self.link_step_2)
+  def link_step_3_click(self, **event_args):
+    self.show_hide_card(self.card_step_3,self.link_step_3)
 
   def show_hide_card(self, card: ColumnPanel, link: Link, **event_args):
     stat = card.visible
@@ -72,7 +72,7 @@ class Form1(Form1Template):
       result = anvil.server.call('process_text', text_data)
       self.plot_heatmap(result)
       self.show_hide_card(self.card_step_1,self.link_step_1)
-      self.show_hide_card(self.card_step_2,self.link_step_2)
+      self.show_hide_card(self.card_step_3,self.link_step_3)
       #self.show_heatmap(result)
 
   def plot_heatmap(self, result):
