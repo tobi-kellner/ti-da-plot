@@ -7,6 +7,7 @@ import anvil.server
 from datetime import datetime as dt
 import pickle
 import lzma
+import hashlib
 import pandas as pd
 
 if (anvil.server.session.session_id == None):
@@ -44,4 +45,5 @@ def save_datatable(data):
     return
   user_logging.info(f"Saved {le2:,} bytes, previously {le:,} bytes")
 
-def load_data(sesh_id)
+def load_data(sesh_id):
+  pass
