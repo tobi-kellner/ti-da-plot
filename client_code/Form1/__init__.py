@@ -50,6 +50,9 @@ class Form1(Form1Template):
   def link_step_1_click(self, **event_args):
     self.show_hide_card(self.card_step_1,self.link_step_1)
 
+  def link_step_2_click(self, **event_args):
+    self.show_hide_card(self.card_step_2,self.link_step_2)
+
   def link_step_3_click(self, **event_args):
     self.show_hide_card(self.card_step_3,self.link_step_3)
 
@@ -92,4 +95,5 @@ class Form1(Form1Template):
 
   def show_heatmap(self, fig):
     self.plot_1.figure = fig
+
 
