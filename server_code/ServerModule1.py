@@ -24,7 +24,7 @@ def process_text(text_data):
 def _process_dataframe(df):
   # Expect two columns: datetime, value
   df.columns = ['datetime', 'value']
-  df['datetime'] = pd.to_datetime(df['datetime'])
+  df['datetime'] = pd.to_datetime(df['datetime'],format='mixed')
 
   # Extract date and time-of-day
   df['date'] = df['datetime'].dt.date
@@ -33,20 +33,29 @@ def _process_dataframe(df):
   # Pivot into matrix for heatmap
   pivot = df.pivot_table(index='time', columns='date', values='value', aggfunc='mean')
   
-  # fig = go.Figure(data=go.Heatmap(
-  #   x=pivot.columns.astype(str).tolist(),
-  #   y=pivot.index.astype(str).tolist(),
-  #   z=pivot.values.astype(float).tolist(),
-  #   colorscale='magma',
-  #   autocolorscale=False
-  # ))  
-  # return fig
+  fig = go.Figure(data=go.Heatmap(
+    x=pivot.columns.astype(str).tolist(),
+    y=pivot.index.astype(str).tolist(),
+    z=pivot.values.astype(float).tolist(),
+    colorscale='magma',
+    autocolorscale=False
+  ))  
+
+  fig.update_layout(
+    xaxis_title='Day',
+    yaxis_title='Time of Day'
+  )
+  # show daily values
+  fig.update_xaxes(
+    tickformat='%a %d %b %y'
+  )
+  return fig
   
-  return {
-    'x': list(pivot.columns.astype(str)),   # dates
-    'y': list(pivot.index),                 # times
-    'z': pivot.values.astype(float).tolist()              # matrix of values
-  }
+  # return {
+  #   'x': list(pivot.columns.astype(str)),   # dates
+  #   'y': list(pivot.index),                 # times
+  #   'z': pivot.values.astype(float).tolist()              # matrix of values
+  # }
 
 
 

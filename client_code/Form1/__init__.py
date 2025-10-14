@@ -73,23 +73,24 @@ class Form1(Form1Template):
     text_data = self.text_area_1.text
     if text_data.strip():
       result = anvil.server.call('process_text', text_data)
-      self.plot_heatmap(result)
+      #self.plot_heatmap(result)
       self.show_hide_card(self.card_step_1,self.link_step_1)
       self.show_hide_card(self.card_step_3,self.link_step_3)
-      #self.show_heatmap(result)
+      self.show_heatmap(result)
 
   def plot_heatmap(self, result):
     # result contains: x (dates), y (times), z (values)
 
-    my_cs = "plasma"
+    my_cs = "blues"
     fig = go.Figure(data=go.Heatmap(
       x=result['x'],
       y=result['y'],
       z=result['z'],
       colorscale='plasma',
+      tickformat='%a %d %b %y',
       autocolorscale=False
     ))
-    
+
     self.plot_1.figure = fig
     user_logging.info(f"Created heatmap with {my_cs}")
 
